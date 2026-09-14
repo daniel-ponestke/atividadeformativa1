@@ -6,3 +6,4 @@ def dividir(a, b):
         raise ValueError("Divisão por zero não é permitida")
     return a / b
 # teste de alteração
+# teste de alteração 2
