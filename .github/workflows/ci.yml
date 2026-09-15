@@ -10,7 +10,8 @@ env:
   PYTHONPATH: .
 
 jobs:
-  build-and-test:
+  testes:
+    name: Testes automatizados
     runs-on: ubuntu-latest
 
     steps:
@@ -27,5 +28,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Rodar testes
+      - name: Rodar os testes
         run: python -m pytest -v
+
+  qualidade:
+    name: Qualidade de código
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Ruff
+        run: pip install ruff
+
+      - name: Rodar análise estática
+        run: ruff check .
