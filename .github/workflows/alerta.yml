@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Enviar alerta para o Discord
-        run: |
-          curl -H "Content-Type: application/json" \
-            -d '{"content": "🔔 Alerta do repositório ${{ github.repository }} (evento: ${{ github.event_name }}, branch: ${{ github.ref_name }}, autor: ${{ github.actor }})"}' \
-            ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@0.3.2
+        with:
+          args: '🔔 Alerta do repositório ${{ github.repository }} | Evento: ${{ github.event_name }} | Branch: ${{ github.ref_name }} | Autor: ${{ github.actor }}'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
